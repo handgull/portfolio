@@ -55,7 +55,6 @@ radius = 6.0
 
 [node name="BugEnemy" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 4
-collision_mask = 5
 script = ExtResource("1_k7bd8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
