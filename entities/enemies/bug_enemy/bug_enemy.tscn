@@ -54,7 +54,8 @@ radius = 11.0
 radius = 6.0
 
 [node name="BugEnemy" type="CharacterBody2D" groups=["enemies"]]
-collision_layer = 4
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_k7bd8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -77,7 +78,7 @@ sprite = NodePath("../Visuals/Sprite2D")
 
 [node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_x8m44")]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 2
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
