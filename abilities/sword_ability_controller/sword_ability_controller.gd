@@ -10,6 +10,7 @@ var wait_time: float
 func _ready():
 	wait_time = $Timer.wait_time
 	timer.timeout.connect(_on_timer_timeout)
+	GameEvents.ability_upgrade_added.connect(_on_ability_upgrade_added)
 
 func _on_timer_timeout():
 	var player = get_tree().get_first_node_in_group(Constants.PLAYER_GROUP) as Node2D
@@ -38,3 +39,11 @@ func _on_timer_timeout():
 
 	var enemy_direction = enemies[0].global_position - sword_instance.global_position
 	sword_instance.rotation = enemy_direction.angle()
+
+func _on_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary):
+	if upgrade.id != "sword_rate":
+		return
+	
+	var percent_reduction = current_upgrades["sword_rate"]["quantity"] * .1
+	$Timer.wait_time = wait_time * (1 - percent_reduction)
+	$Timer.start()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ba03vjhvndjfs"]
+[gd_scene load_steps=15 format=3 uid="uid://ba03vjhvndjfs"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_r7wib"]
 [ext_resource type="PackedScene" uid="uid://c48ax7scku8oq" path="res://components/health_component/health_component.tscn" id="2_bjd8s"]
@@ -112,8 +112,11 @@ radius = 9.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_tbplm"]
 radius = 35.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_vlag5"]
+radius = 4.0
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
-collision_layer = 0
+collision_layer = 9
 script = ExtResource("1_r7wib")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -170,3 +173,11 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
 shape = SubResource("CircleShape2D_tbplm")
+
+[node name="DoorsArea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorsArea"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_vlag5")

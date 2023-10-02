@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://ywk144mymph2"]
+
+[ext_resource type="Script" path="res://ui/ability_upgrade_card/ability_upgrade_card.gd" id="1_7iikm"]
+
+[node name="AbilityUpgradeCard" type="PanelContainer"]
+custom_minimum_size = Vector2(120, 150)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_7iikm")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Test name"
+
+[node name="DescriptionLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Some description here"
+autowrap_mode = 2

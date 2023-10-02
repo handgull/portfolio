@@ -1,22 +1,27 @@
 extends CharacterBody2D
 
+@export var has_health_bar = true
 @onready var animation_player = $AnimationPlayer
 @onready var visuals = $Visuals
 @onready var enemies_collision = $EnemiesCollision
 @onready var health_component = $HealthComponent
 @onready var damage_interval = $DamageInterval
 @onready var health_bar = $HealthBar
+@onready var abilities = $Abilities
 
 const MAX_SPEED: float = 400.0
 const ACCELLERATION_SMOOTHING: float = 25.0
 var colliding_bodies: int = 0
 
 func _ready():
+	if not has_health_bar:
+		health_bar.hide()
 	enemies_collision.body_entered.connect(_on_body_entered)
 	enemies_collision.body_exited.connect(_on_body_exited)
 	damage_interval.timeout.connect(_on_damage_interval_timeout)
 	health_component.health_changed.connect(_set_health_bar)
 	GameEvents.healing_potion_collected.connect(_on_healing_potion_collected)
+	GameEvents.ability_upgrade_added.connect(_on_ability_upgrade_added)
 	_set_health_bar()
 
 func _process(delta):
@@ -66,3 +71,9 @@ func _on_damage_interval_timeout():
 
 func _on_healing_potion_collected(value: float):
 	health_component.heal(value)
+
+func _on_ability_upgrade_added(ability_upgrade: AbilityUpgrade, _current_upgrades: Dictionary):
+	if not ability_upgrade is Ability:
+		return
+	
+	abilities.add_child((ability_upgrade as Ability).ability_controller_scene.instantiate())
