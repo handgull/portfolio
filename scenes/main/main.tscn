@@ -1,17 +1,21 @@
-[gd_scene load_steps=12 format=3 uid="uid://dmk2j2k8ro6qh"]
+[gd_scene load_steps=16 format=3 uid="uid://dmk2j2k8ro6qh"]
 
-[ext_resource type="PackedScene" uid="uid://col0jw5cf8t1l" path="res://ui/experience_bar/experience_bar.tscn" id="1_abkgm"]
-[ext_resource type="Texture2D" uid="uid://baq157clj0pi8" path="res://assets/tilemap.png" id="1_c75f2"]
-[ext_resource type="PackedScene" uid="uid://cjs13ag2u5yul" path="res://managers/arena_time_manager/arena_time_manager.tscn" id="1_j417v"]
-[ext_resource type="PackedScene" uid="uid://ck1y7wpn55rnd" path="res://entities/game_camera/game_camera.tscn" id="1_wc3o6"]
-[ext_resource type="PackedScene" uid="uid://ba03vjhvndjfs" path="res://entities/player/player.tscn" id="2_5lcoy"]
-[ext_resource type="PackedScene" uid="uid://lwyccvmu7qlq" path="res://managers/enemies_manager/enemies_manager.tscn" id="2_wvo48"]
-[ext_resource type="PackedScene" uid="uid://eag0tjhrwjqe" path="res://entities/enemies/bug_enemy/bug_enemy.tscn" id="3_di3oh"]
-[ext_resource type="PackedScene" uid="uid://b86xyhm367jfe" path="res://managers/experience_manager/experience_manager.tscn" id="4_foy0y"]
-[ext_resource type="PackedScene" uid="uid://dhkvclk60alrg" path="res://entities/healing_potion/healing_potion.tscn" id="9_4fueh"]
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_1ehx7"]
+[ext_resource type="PackedScene" uid="uid://cbmn8e2a3n1gr" path="res://ui/arena_time_ui/arena_time_ui.tscn" id="2_uj6xl"]
+[ext_resource type="PackedScene" uid="uid://col0jw5cf8t1l" path="res://ui/experience_bar/experience_bar.tscn" id="3_de2tm"]
+[ext_resource type="PackedScene" uid="uid://bjvwjqxi8qrsd" path="res://ui/start_screen/start_screen.tscn" id="3_fqsan"]
+[ext_resource type="PackedScene" uid="uid://cjs13ag2u5yul" path="res://managers/arena_time_manager/arena_time_manager.tscn" id="4_0keae"]
+[ext_resource type="PackedScene" uid="uid://b0qftsihq7fus" path="res://ui/end_screen/end_screen.tscn" id="5_au7hw"]
+[ext_resource type="PackedScene" uid="uid://lwyccvmu7qlq" path="res://managers/enemies_manager/enemies_manager.tscn" id="6_1ytgb"]
+[ext_resource type="PackedScene" uid="uid://eag0tjhrwjqe" path="res://entities/enemies/bug_enemy/bug_enemy.tscn" id="7_qdaf3"]
+[ext_resource type="PackedScene" uid="uid://b86xyhm367jfe" path="res://managers/experience_manager/experience_manager.tscn" id="8_0hn3p"]
+[ext_resource type="PackedScene" uid="uid://ck1y7wpn55rnd" path="res://entities/game_camera/game_camera.tscn" id="9_4l61a"]
+[ext_resource type="Texture2D" uid="uid://baq157clj0pi8" path="res://assets/tilemap.png" id="10_gyiyk"]
+[ext_resource type="PackedScene" uid="uid://ba03vjhvndjfs" path="res://entities/player/player.tscn" id="11_52x3p"]
+[ext_resource type="PackedScene" uid="uid://dhkvclk60alrg" path="res://entities/healing_potion/healing_potion.tscn" id="12_hulir"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dpcy5"]
-texture = ExtResource("1_c75f2")
+texture = ExtResource("10_gyiyk")
 0:4/0 = 0
 0:4/0/terrain_set = 0
 0:4/0/terrain = 0
@@ -222,19 +226,26 @@ terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
 sources/1 = SubResource("TileSetAtlasSource_dpcy5")
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_1ehx7")
+end_screen_scene = ExtResource("5_au7hw")
+start_screen_scene = ExtResource("3_fqsan")
 
-[node name="ExperienceBar" parent="." node_paths=PackedStringArray("experience_manager") instance=ExtResource("1_abkgm")]
-experience_manager = NodePath("../ExperienceManager")
-
-[node name="ArenaTimeManager" parent="." instance=ExtResource("1_j417v")]
-
-[node name="EnemiesManager" parent="." node_paths=PackedStringArray("arena_time_manager") instance=ExtResource("2_wvo48")]
-bug_enemy_scene = ExtResource("3_di3oh")
+[node name="ArenaTimeUI" parent="." node_paths=PackedStringArray("arena_time_manager") instance=ExtResource("2_uj6xl")]
 arena_time_manager = NodePath("../ArenaTimeManager")
 
-[node name="ExperienceManager" parent="." instance=ExtResource("4_foy0y")]
+[node name="ExperienceBar" parent="." node_paths=PackedStringArray("experience_manager") instance=ExtResource("3_de2tm")]
+experience_manager = NodePath("../ExperienceManager")
 
-[node name="GameCamera" parent="." instance=ExtResource("1_wc3o6")]
+[node name="ArenaTimeManager" parent="." instance=ExtResource("4_0keae")]
+end_screen_scene = ExtResource("5_au7hw")
+
+[node name="EnemiesManager" parent="." node_paths=PackedStringArray("arena_time_manager") instance=ExtResource("6_1ytgb")]
+bug_enemy_scene = ExtResource("7_qdaf3")
+arena_time_manager = NodePath("../ArenaTimeManager")
+
+[node name="ExperienceManager" parent="." instance=ExtResource("8_0hn3p")]
+
+[node name="GameCamera" parent="." instance=ExtResource("9_4l61a")]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_wuaqj")
@@ -243,11 +254,12 @@ layer_0/tile_data = PackedInt32Array(1638444, 1, 4, 1572908, 65537, 4, 1507372, 
 
 [node name="EntitiesLayer" type="Node2D" parent="." groups=["entities_layer"]]
 
-[node name="Player" parent="EntitiesLayer" instance=ExtResource("2_5lcoy")]
+[node name="Player" parent="EntitiesLayer" instance=ExtResource("11_52x3p")]
+unique_name_in_owner = true
 position = Vector2(81, 343)
 collision_layer = 4
 
-[node name="HealingPotion" parent="EntitiesLayer" instance=ExtResource("9_4fueh")]
+[node name="HealingPotion" parent="EntitiesLayer" instance=ExtResource("12_hulir")]
 position = Vector2(433, 212)
 
 [node name="ForegroundLayer" type="Node2D" parent="." groups=["foreground_layer"]]

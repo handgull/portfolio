@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjvwjqxi8qrsd"]
+
+[ext_resource type="Script" path="res://ui/start_screen/start_screen.gd" id="1_6pn3v"]
+
+[node name="StartScreen" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_6pn3v")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Handgull's portfolio"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Ciao! Per vedere il mio portfolio hai 3 opzioni:
+1) Puoi giocare al mio minigioco e resistere
+   per 5 minuti.
+2) Puoi entrare nella casetta
+3) Puoi farti uccidere dai mostri e scegliere
+   \"Check the portfolio\""
+vertical_alignment = 1
+
+[node name="StartButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Start"

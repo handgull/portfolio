@@ -22,7 +22,7 @@ func _ready():
 func _process(delta):
 	var direction = get_direction_vector()
 	var target_velocity = direction * MAX_SPEED
-	var velocity = Vector2.ZERO
+	velocity = Vector2.ZERO
 	velocity = lerp(velocity, target_velocity, 1 - exp(-delta * ACCELLERATION_SMOOTHING))
 	set_velocity(velocity)
 	move_and_slide()
@@ -58,7 +58,7 @@ func _on_body_entered(body: Node2D):
 	colliding_bodies += 1
 	check_deal_damage()
 
-func _on_body_exited(body: Node2D):
+func _on_body_exited(_body: Node2D):
 	colliding_bodies -= 1
 
 func _on_damage_interval_timeout():

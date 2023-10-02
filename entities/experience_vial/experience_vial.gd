@@ -24,7 +24,7 @@ func _collect():
 func disable_collision():
 	collision_shape_2d.disabled = true
 
-func _on_area_entered(other_area: Area2D):
+func _on_area_entered(_other_area: Area2D):
 	Callable(disable_collision).call_deferred()
 	
 	var tween = create_tween()

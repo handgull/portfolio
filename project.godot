@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="handgull's portfolio"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/main/main.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -27,6 +27,10 @@ window/size/viewport_height=360
 window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="viewport"
+
+[gui]
+
+theme/custom="res://resources/theme/theme.tres"
 
 [input]
 
